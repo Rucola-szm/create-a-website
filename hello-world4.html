@@ -6,24 +6,25 @@
     <title>時計</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100vw;
-            height: 100vh;
+            color: aquamarine;
+            background-color: black;
         }
 
-        #clock {
-            font-size: 10rem;
+        #clock_date {
+            text-align: right;
+            font-size: 2rem;
+        }
+
+        #clock_time {
+            text-align: center;
+            font-size: 6rem;
         }
     </style>
 </head>
 
 <body>
-    <div id="clock"></div>
+    <div id="clock_date"></div>
+    <div id="clock_time"></div>
     <script>
         const update = () => {
             // Dataオブジェクトの作成
@@ -32,8 +33,16 @@
             const hours = time.getHours();
             const minutes = `0${time.getMinutes()}`.slice(-2);
             const seconds = `0${time.getSeconds()}`.slice(-2);
+
+            // 年,月,日,曜日の取得
+            const weeks = new Array("Sun", "Mon", "Thu", "Wed", "Thr", "Fri", "Sat");
+            const year = time.getFullYear();
+            const month = time.getMonth() + 1;
+            const date = time.getDate();
+            const day = weeks[time.getDay()];
             // clockに対して操作する
-            document.getElementById("clock").innerHTML = `${hours}:${minutes}:${seconds}`;
+            document.getElementById("clock_time").innerHTML = `${hours}:${minutes}:${seconds}`;
+            document.getElementById("clock_date").innerHTML = `${year}:${month}:${date}:${day}`;
         }
         // 初回ロード時実行
         update();
